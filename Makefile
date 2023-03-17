@@ -1,17 +1,16 @@
 CC=gcc
-# CFLAGS will be the options passed to the compiler.
 CFLAGS= -c -Wall
 LIBS= -lm
 
 all: *.o
-	$(CC) $(LIBS) $< -o $@
+	$(CC) $^ -o $@  $(LIBS)
 
-%: %.o #utilities.o TODO
-	$(CC) $< -o $@  $(LIBS)
+%.x : %.o utilities.o # TODO WHY THE FUCK WONT IT WORK WITHOUT .x
+	$(CC) $(LDFLAGS) $^ -o $@  $(LIBS)
 
 %.o: %.c
-	$(CC) $(CFLAGS) $<
+	$(CC) $(CFLAGS) $^
 
-.PHONY: clean # not actual target
+.PHONY: clean
 clean:
-	rm -rf *.o 
+	rm -rf *.o *.x
