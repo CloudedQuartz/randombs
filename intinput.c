@@ -12,9 +12,8 @@ int get_int(char * prompt)
     getline(&buf, &len_buf, stdin);
     
     int ret = 0;
-    int i = 0;
 
-    while (i <= strlen(buf) - 2) // strlen includes \n
+    for (int i = 0; i < strlen(buf) - 1; i++) // strlen includes \n
     {
         char tmp_buf = buf[i];
         if ((int)(tmp_buf) < 48 || (int)(tmp_buf) > 57) // check if not number
@@ -24,7 +23,6 @@ int get_int(char * prompt)
     
         int exp = (int)(pow(10, strlen(buf) - 2 - i));
         ret += ((int)(tmp_buf) - 48) * exp;
-        i++;
     }
     return ret;
 }
